@@ -13,12 +13,7 @@
 ### 1. Claude Codeでプラグインをインストール
 
 ```
-/plugins install <repository-url>
-```
-
-例:
-```
-/plugins install https://github.com/<org>/claude-code-team-plugins
+/plugins install https://github.com/TradeWaltz/claude-code-team-plugins
 ```
 
 ### 2. プラグインを有効化
@@ -73,7 +68,7 @@ gh auth status
 または、特定バージョンを指定:
 
 ```
-/plugins install <repository-url>@v1.1.0
+/plugins install https://github.com/TradeWaltz/claude-code-team-plugins@v1.1.0
 ```
 
 ## 開発・貢献
