@@ -1,8 +1,8 @@
-# Annex AI Plugins - Claude Code ガイド
+# AI Plugins - Claude Code ガイド
 
 ## プロジェクト概要
 
-Annex開発チーム共有のClaude Codeスキル集です。
+チーム共有のClaude Codeスキル集です。
 
 ## 開発ガイドライン
 
@@ -37,7 +37,7 @@ ai-plugins/
 
 このプロジェクトでは、品質担保のため以下の2つのタイミングでCopilotレビューを実施します。
 
-> **Note**: 以下のワークフローはClaude Code使用時のルールです。`ExitPlanMode`はClaude Codeのplan mode終了コマンド、`/annex:copilot-review`はこのプロジェクトで提供するスキルです。
+> **Note**: 以下のワークフローはClaude Code使用時のルールです。`ExitPlanMode`はClaude Codeのplan mode終了コマンド、`/ai-plugins:copilot-review`はこのプロジェクトで提供するスキルです。
 
 ### planファイルについて
 
@@ -66,7 +66,7 @@ copilot --model gpt-5.2 --add-dir "$(dirname planファイル)" -s -p "$(pwd)/pl
 **タイミング**: コード変更完了後、コミット前
 
 **手順**:
-1. 変更完了後、`/annex:copilot-review` スキルでレビューを依頼
+1. 変更完了後、`/ai-plugins:copilot-review` スキルでレビューを依頼
 2. Copilotの指摘を確認し、妥当なものを反映
 3. レビュー対応後、コミットを実施
 

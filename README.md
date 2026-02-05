@@ -1,6 +1,6 @@
-# Annex AI Plugins
+# AI Plugins
 
-Annex開発チーム共有のClaude Codeスキル集です。
+チーム共有のClaude Codeスキル集です。
 
 ## 含まれるスキル
 
@@ -13,13 +13,13 @@ Annex開発チーム共有のClaude Codeスキル集です。
 ### 1. プラグインをクローン
 
 ```bash
-git clone git@github.com:shogidemo/ai-plugins.git ~/.claude/plugins/annex
+git clone git@github.com:shogidemo/ai-plugins.git ~/.claude/plugins/ai-plugins
 ```
 
 ### 2. Claude Codeを起動
 
 ```bash
-claude --plugin-dir ~/.claude/plugins/annex
+claude --plugin-dir ~/.claude/plugins/ai-plugins
 ```
 
 ## 使用方法
@@ -30,14 +30,14 @@ GitHub Copilot CLIを使ってコードレビューを依頼するスキルで�
 
 **呼び出し方法:**
 ```
-/annex:copilot-review
+/ai-plugins:copilot-review
 ```
 
 **使用例:**
 ```
-/annex:copilot-review 現在の変更をレビューして
-/annex:copilot-review PR #123 をレビューして
-/annex:copilot-review src/main.py をレビューして
+/ai-plugins:copilot-review 現在の変更をレビューして
+/ai-plugins:copilot-review PR #123 をレビューして
+/ai-plugins:copilot-review src/main.py をレビューして
 ```
 
 ## 前提条件
@@ -62,7 +62,7 @@ gh auth status
 ## 更新方法
 
 ```bash
-cd ~/.claude/plugins/annex && git pull
+cd ~/.claude/plugins/ai-plugins && git pull
 ```
 
 ## 開発・貢献

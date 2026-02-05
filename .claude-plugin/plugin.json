@@ -1,6 +1,6 @@
 {
-  "name": "annex",
-  "description": "Annex開発チーム共有のClaude Codeスキル集",
+  "name": "ai-plugins",
+  "description": "チーム共有のClaude Codeスキル集",
   "version": "1.0.0",
   "author": {
     "name": "sho.sato"
