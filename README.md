@@ -10,15 +10,17 @@ Annex開発チーム共有のClaude Codeスキル集です。
 
 ## インストール方法
 
-### 1. Claude Codeでプラグインをインストール
+### 1. プラグインをクローン
 
+```bash
+git clone git@github.com:shogidemo/annex-ai-plugins.git ~/.claude/plugins/annex
 ```
-/plugins install https://github.com/TradeWaltz/annex-ai-plugins
+
+### 2. Claude Codeを起動
+
+```bash
+claude --plugin-dir ~/.claude/plugins/annex
 ```
-
-### 2. プラグインを有効化
-
-インストール後、必要に応じてプラグインを有効化してください。
 
 ## 使用方法
 
@@ -59,16 +61,8 @@ gh auth status
 
 ## 更新方法
 
-プラグインを最新版に更新するには:
-
-```
-/plugins update annex
-```
-
-または、特定バージョンを指定:
-
-```
-/plugins install https://github.com/TradeWaltz/annex-ai-plugins@v1.1.0
+```bash
+cd ~/.claude/plugins/annex && git pull
 ```
 
 ## 開発・貢献
