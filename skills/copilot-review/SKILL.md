@@ -4,9 +4,15 @@ description: Requests code review from GitHub Copilot CLI. Use for getting a sec
 allowed-tools: Bash(copilot:*), Bash(git diff:*), Bash(git log:*), Bash(gh pr diff:*), Bash(gh pr view:*), Bash(test:*)
 ---
 
-# Ask Copilot Review
+# Copilot レビュー
 
 GitHub Copilot CLI (`copilot`) を使ってコードレビューを依頼するスキル。
+
+> **allowed-tools の用途説明**:
+> - `Bash(copilot:*)`: Copilot CLI実行
+> - `Bash(git diff:*)`, `Bash(git log:*)`: Git差分・履歴取得
+> - `Bash(gh pr diff:*)`, `Bash(gh pr view:*)`: PR情報取得
+> - `Bash(test:*)`: ファイル存在・サイズ確認（`test -s "$FILE"` で使用）
 
 ## 前提条件（必須）
 

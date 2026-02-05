@@ -14,6 +14,21 @@
 4. **テンプレートを参考にする**: `skills/_template/SKILL.md` の構造に従う
 5. **バリデーションを実行**: スキル追加・変更時は `bash scripts/validate-skills.sh` で検証
 
+### allowed-tools パターン
+
+スキルで許可するツールの記述形式：
+
+| 形式 | 説明 | 例 |
+|------|------|-----|
+| `ToolName` | ツール全体を許可 | `Read`, `Write` |
+| `ToolName(prefix:*)` | 特定プレフィックスで始まるコマンドを許可 | `Bash(git diff:*)` |
+| `ToolName(**)` | ツールの全パターンを許可 | `Read(**)` |
+
+**よく使うパターン例**:
+- `Bash(git diff:*)`: `git diff` コマンド
+- `Bash(gh pr view:*)`: GitHub CLI の PR情報取得
+- `Bash(test:*)`: ファイル存在・サイズ確認（`test -s "$FILE"`）
+
 ### ファイル構造
 
 ```
@@ -41,11 +56,43 @@ ai-plugins/
 - **コミットメッセージ**: 日本語
 - **PRタイトル・説明**: 日本語
 
+## バージョン管理
+
+`.claude-plugin/plugin.json` の `version` フィールドは[セマンティックバージョニング](https://semver.org/lang/ja/)に従う。
+
+| 変更内容 | バージョン更新 |
+|---------|---------------|
+| 後方互換性のない変更（スキル名変更、allowed-tools の破壊的変更） | MAJOR |
+| 新スキル追加、既存スキルの機能拡張 | MINOR |
+| バグ修正、ドキュメント修正 | PATCH |
+
 ## Copilotレビューワークフロー
 
 このプロジェクトでは、品質担保のため以下の2つのタイミングでCopilotレビューを実施します。
 
 > **Note**: 以下のワークフローはClaude Code使用時のルールです。`ExitPlanMode`はClaude Codeのplan mode終了コマンド、`/ai-plugins:copilot-review`はこのプロジェクトで提供するスキルです。
+
+### ワークフロー図
+
+```mermaid
+flowchart TD
+    A[タスク開始] --> B{Plan作成?}
+    B -->|Yes| C[planファイル作成]
+    C --> D[Copilot CLIでplanレビュー]
+    D --> E{指摘あり?}
+    E -->|Yes| F[planに反映]
+    F --> D
+    E -->|No| G[ExitPlanMode]
+    B -->|No| H[実装作業]
+    G --> H
+    H --> I[コード変更完了]
+    I --> J[/ai-plugins:copilot-review でレビュー]
+    J --> K{指摘あり?}
+    K -->|Yes| L[妥当な指摘を反映]
+    L --> J
+    K -->|No| M[コミット]
+    M --> N[タスク完了]
+```
 
 ### planファイルについて
 

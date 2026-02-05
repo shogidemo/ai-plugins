@@ -110,6 +110,31 @@ claude --plugin-dir .
 - `gh auth status` でGitHub認証済み
 - `bash scripts/validate-skills.sh` でバリデーションが通る
 
+### スキルの追加方法
+
+新しいスキルを追加する手順：
+
+1. **テンプレートをコピー**
+   ```bash
+   cp -r skills/_template skills/my-new-skill
+   ```
+
+2. **SKILL.md を編集**
+   - `name`: kebab-case形式で指定（例: `my-new-skill`）
+   - `description`: 英語で簡潔に（CLIヘルプに表示）
+   - `allowed-tools`: 必要最小限のツールを許可
+   - 本文は日本語で記述
+   - `## テンプレート使用時の注意` セクションを削除
+
+3. **バリデーション実行**
+   ```bash
+   bash scripts/validate-skills.sh
+   ```
+
+4. **PRを作成してレビューを受ける**
+
+詳細は [CLAUDE.md](CLAUDE.md) を参照してください。
+
 ### プラグインの構造
 
 ```
