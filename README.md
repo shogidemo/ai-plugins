@@ -1,19 +1,19 @@
-# Claude Code Team Plugins
+# Annex AI Plugins
 
-チーム共有のClaude Codeスキル集です。
+Annex開発チーム共有のClaude Codeスキル集です。
 
 ## 含まれるスキル
 
 | スキル名 | 説明 |
 |---------|------|
-| `ask-copilot-review` | GitHub Copilot CLIを使ってコードレビューを依頼 |
+| `copilot-review` | GitHub Copilot CLIを使ってコードレビューを依頼 |
 
 ## インストール方法
 
 ### 1. Claude Codeでプラグインをインストール
 
 ```
-/plugins install https://github.com/TradeWaltz/claude-code-team-plugins
+/plugins install https://github.com/TradeWaltz/annex-ai-plugins
 ```
 
 ### 2. プラグインを有効化
@@ -22,20 +22,20 @@
 
 ## 使用方法
 
-### ask-copilot-review
+### copilot-review
 
 GitHub Copilot CLIを使ってコードレビューを依頼するスキルです。
 
 **呼び出し方法:**
 ```
-/team-tools:ask-copilot-review
+/annex:copilot-review
 ```
 
 **使用例:**
 ```
-/team-tools:ask-copilot-review 現在の変更をレビューして
-/team-tools:ask-copilot-review PR #123 をレビューして
-/team-tools:ask-copilot-review src/main.py をレビューして
+/annex:copilot-review 現在の変更をレビューして
+/annex:copilot-review PR #123 をレビューして
+/annex:copilot-review src/main.py をレビューして
 ```
 
 ## 前提条件
@@ -62,13 +62,13 @@ gh auth status
 プラグインを最新版に更新するには:
 
 ```
-/plugins update team-tools
+/plugins update annex
 ```
 
 または、特定バージョンを指定:
 
 ```
-/plugins install https://github.com/TradeWaltz/claude-code-team-plugins@v1.1.0
+/plugins install https://github.com/TradeWaltz/annex-ai-plugins@v1.1.0
 ```
 
 ## 開発・貢献
@@ -76,17 +76,17 @@ gh auth status
 ### ローカルでのテスト
 
 ```bash
-claude --plugin-dir ./claude-code-team-plugins
+claude --plugin-dir ./annex-ai-plugins
 ```
 
 ### プラグインの構造
 
 ```
-claude-code-team-plugins/
+annex-ai-plugins/
 ├── .claude-plugin/
 │   └── plugin.json       # プラグインマニフェスト
 ├── skills/
-│   └── ask-copilot-review/
+│   └── copilot-review/
 │       └── SKILL.md      # スキル定義
 └── README.md
 ```
