@@ -11,6 +11,8 @@
 1. **SKILL.md 形式に従う**: `skills/{skill-name}/SKILL.md` として作成
 2. **allowed-tools を明示**: 必要なツールのみを許可
 3. **前提条件を明記**: 必要な外部ツールや認証要件を記載
+4. **テンプレートを参考にする**: `skills/_template/SKILL.md` の構造に従う
+5. **バリデーションを実行**: スキル追加・変更時は `bash scripts/validate-skills.sh` で検証
 
 ### ファイル構造
 
@@ -22,8 +24,12 @@ ai-plugins/
 │   ├── plugin.json           # プラグインマニフェスト
 │   └── marketplace.json      # マーケットプレイス設定
 ├── skills/
+│   ├── _template/
+│   │   └── SKILL.md          # スキルテンプレート
 │   └── {skill-name}/
 │       └── SKILL.md          # スキル定義
+├── scripts/
+│   └── validate-skills.sh    # スキルバリデーション
 ├── CLAUDE.md                 # 開発ガイドライン
 └── README.md
 ```

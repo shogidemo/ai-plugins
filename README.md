@@ -89,9 +89,26 @@ cd ~/.claude/plugins/ai-plugins && git pull
 
 ### ローカルでのテスト
 
+リポジトリをクローンしてローカルでテストする場合：
+
 ```bash
-claude --plugin-dir ./ai-plugins
+# リポジトリをクローン
+git clone git@github.com:shogidemo/ai-plugins.git
+cd ai-plugins
+
+# プラグインを読み込んでClaude Codeを起動
+claude --plugin-dir .
 ```
+
+起動後、以下のコマンドでスキルが認識されていることを確認：
+
+    /ai-plugins:copilot-review
+
+**動作確認チェックリスト:**
+- スキルが `/ai-plugins:copilot-review` で呼び出せる
+- `copilot --version` でCopilot CLIが利用可能
+- `gh auth status` でGitHub認証済み
+- `bash scripts/validate-skills.sh` でバリデーションが通る
 
 ### プラグインの構造
 
@@ -103,8 +120,12 @@ ai-plugins/
 │   ├── plugin.json           # プラグインマニフェスト
 │   └── marketplace.json      # マーケットプレイス設定
 ├── skills/
+│   ├── _template/
+│   │   └── SKILL.md          # スキルテンプレート
 │   └── copilot-review/
 │       └── SKILL.md          # スキル定義
+├── scripts/
+│   └── validate-skills.sh    # スキルバリデーション
 ├── CLAUDE.md                 # 開発ガイドライン
 └── README.md
 ```
