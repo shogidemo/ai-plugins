@@ -13,7 +13,7 @@ Annex開発チーム共有のClaude Codeスキル集です。
 ### 1. プラグインをクローン
 
 ```bash
-git clone git@github.com:shogidemo/annex-ai-plugins.git ~/.claude/plugins/annex
+git clone git@github.com:shogidemo/ai-plugins.git ~/.claude/plugins/annex
 ```
 
 ### 2. Claude Codeを起動
@@ -70,13 +70,13 @@ cd ~/.claude/plugins/annex && git pull
 ### ローカルでのテスト
 
 ```bash
-claude --plugin-dir ./annex-ai-plugins
+claude --plugin-dir ./ai-plugins
 ```
 
 ### プラグインの構造
 
 ```
-annex-ai-plugins/
+ai-plugins/
 ├── .claude-plugin/
 │   └── plugin.json       # プラグインマニフェスト
 ├── skills/
