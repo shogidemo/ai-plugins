@@ -6,7 +6,7 @@
   "plugins": [
     {
       "name": "ai-plugins",
-      "source": ".",
+      "source": "./",
       "description": "チーム共有のClaude Codeスキル集"
     }
   ]
