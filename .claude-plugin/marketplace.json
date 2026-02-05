@@ -1,0 +1,13 @@
+{
+  "name": "ai-plugins",
+  "owner": {
+    "name": "sho.sato"
+  },
+  "plugins": [
+    {
+      "name": "ai-plugins",
+      "source": ".",
+      "description": "チーム共有のClaude Codeスキル集"
+    }
+  ]
+}

@@ -10,15 +10,27 @@
 
 ## インストール方法
 
-### 1. プラグインをクローン
+### 方法1: GitHub URLから直接インストール（推奨）
+
+クローン不要で更新も楽なため推奨。
+
+```bash
+# マーケットプレイスを追加
+/plugin marketplace add shogidemo/ai-plugins
+
+# プラグインをインストール
+/plugin install ai-plugins@ai-plugins
+
+# インストール確認
+/plugin list
+```
+
+### 方法2: クローンしてインストール
+
+ローカルでカスタマイズしたい場合向け。
 
 ```bash
 git clone git@github.com:shogidemo/ai-plugins.git ~/.claude/plugins/ai-plugins
-```
-
-### 2. Claude Codeを起動
-
-```bash
 claude --plugin-dir ~/.claude/plugins/ai-plugins
 ```
 
@@ -60,6 +72,14 @@ gh auth status
 ```
 
 ## 更新方法
+
+### 方法1でインストールした場合
+
+```bash
+/plugin marketplace update ai-plugins
+```
+
+### 方法2でインストールした場合
 
 ```bash
 cd ~/.claude/plugins/ai-plugins && git pull
