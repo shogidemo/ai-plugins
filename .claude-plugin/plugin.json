@@ -4,5 +4,11 @@
   "version": "1.0.0",
   "author": {
     "name": "sho.sato"
-  }
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shogidemo/ai-plugins"
+  },
+  "keywords": ["claude-code", "skills", "copilot", "review"]
 }

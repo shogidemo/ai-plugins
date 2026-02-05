@@ -16,13 +16,15 @@
 
 ```
 ai-plugins/
-├── .claude-plugin/
-│   └── plugin.json       # プラグインマニフェスト
 ├── .claude/
-│   └── settings.json     # プロジェクト設定
+│   └── settings.json         # プロジェクト設定
+├── .claude-plugin/
+│   ├── plugin.json           # プラグインマニフェスト
+│   └── marketplace.json      # マーケットプレイス設定
 ├── skills/
 │   └── {skill-name}/
-│       └── SKILL.md      # スキル定義
+│       └── SKILL.md          # スキル定義
+├── CLAUDE.md                 # 開発ガイドライン
 └── README.md
 ```
 

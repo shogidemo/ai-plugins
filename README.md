@@ -97,14 +97,18 @@ claude --plugin-dir ./ai-plugins
 
 ```
 ai-plugins/
+├── .claude/
+│   └── settings.json         # プロジェクト設定
 ├── .claude-plugin/
-│   └── plugin.json       # プラグインマニフェスト
+│   ├── plugin.json           # プラグインマニフェスト
+│   └── marketplace.json      # マーケットプレイス設定
 ├── skills/
 │   └── copilot-review/
-│       └── SKILL.md      # スキル定義
+│       └── SKILL.md          # スキル定義
+├── CLAUDE.md                 # 開発ガイドライン
 └── README.md
 ```
 
 ## ライセンス
 
-MIT License
+MIT License - 詳細は [LICENSE](LICENSE) を参照
