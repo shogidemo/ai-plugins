@@ -1,5 +1,5 @@
 ---
-name: ask-copilot-review
+name: copilot-review
 description: Requests code review from GitHub Copilot CLI. Use for getting a second opinion on code changes, reviewing PRs, or analyzing specific files.
 allowed-tools: Bash(copilot:*), Bash(git diff:*), Bash(git log:*), Bash(gh pr diff:*), Bash(gh pr view:*), Bash(test:*)
 ---
