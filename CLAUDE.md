@@ -21,13 +21,13 @@
 | 形式 | 説明 | 例 |
 |------|------|-----|
 | `ToolName` | ツール全体を許可 | `Read`, `Write` |
-| `ToolName(prefix:*)` | 特定プレフィックスで始まるコマンドを許可 | `Bash(git diff:*)` |
+| `ToolName(prefix *)` | 特定プレフィックスで始まるコマンドを許可 | `Bash(git diff *)` |
 | `ToolName(**)` | ツールの全パターンを許可 | `Read(**)` |
 
 **よく使うパターン例**:
-- `Bash(git diff:*)`: `git diff` コマンド
-- `Bash(gh pr view:*)`: GitHub CLI の PR情報取得
-- `Bash(test:*)`: ファイル存在・サイズ確認（`test -s "$FILE"`）
+- `Bash(git diff *)`: `git diff` コマンド
+- `Bash(gh pr view *)`: GitHub CLI の PR情報取得
+- `Bash(test *)`: ファイル存在・サイズ確認（`test -s path/to/file`）
 
 ### ファイル構造
 
@@ -111,7 +111,7 @@ flowchart TD
 
 **コマンド例**:
 ```bash
-copilot --model gpt-5.2 --add-dir "$(dirname planファイル)" -s -p "$(pwd)/planファイル をレビューしてください。抜け漏れや改善点があれば指摘してください。"
+copilot --model gpt-5.2 --add-dir ~/.claude/plans -s -p "planファイルパス をレビューしてください。抜け漏れや改善点があれば指摘してください。"
 ```
 
 ※このレビューをスキップしてExitPlanModeを呼び出すことは禁止

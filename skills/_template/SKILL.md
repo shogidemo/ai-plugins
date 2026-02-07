@@ -1,7 +1,7 @@
 ---
 name: my-skill-name
 description: 1行の説明（英語推奨、CLIヘルプに表示される）
-allowed-tools: Bash(git diff:*), Bash(git log:*), Read
+allowed-tools: Bash(git diff *), Bash(git log *), Read
 ---
 
 # スキル名

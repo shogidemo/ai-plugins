@@ -1,7 +1,7 @@
 ---
 name: copilot-review
 description: Requests code review from GitHub Copilot CLI. Use for getting a second opinion on code changes, reviewing PRs, or analyzing specific files.
-allowed-tools: Bash(copilot:*), Bash(git diff:*), Bash(git log:*), Bash(gh pr diff:*), Bash(gh pr view:*), Bash(test:*)
+allowed-tools: Bash(copilot *), Bash(git diff *), Bash(git log *), Bash(gh pr diff *), Bash(gh pr view *), Bash(test *)
 ---
 
 # Copilot レビュー
@@ -9,10 +9,10 @@ allowed-tools: Bash(copilot:*), Bash(git diff:*), Bash(git log:*), Bash(gh pr di
 GitHub Copilot CLI (`copilot`) を使ってコードレビューを依頼するスキル。
 
 > **allowed-tools の用途説明**:
-> - `Bash(copilot:*)`: Copilot CLI実行
-> - `Bash(git diff:*)`, `Bash(git log:*)`: Git差分・履歴取得
-> - `Bash(gh pr diff:*)`, `Bash(gh pr view:*)`: PR情報取得
-> - `Bash(test:*)`: ファイル存在・サイズ確認（`test -s "$FILE"` で使用）
+> - `Bash(copilot *)`: Copilot CLI実行
+> - `Bash(git diff *)`, `Bash(git log *)`: Git差分・履歴取得
+> - `Bash(gh pr diff *)`, `Bash(gh pr view *)`: PR情報取得
+> - `Bash(test *)`: ファイル存在・サイズ確認
 
 ## 前提条件（必須）
 
@@ -108,12 +108,11 @@ copilot --model gpt-5.2 -s -p "レビュープロンプト"
 **PR情報の自動取得例:**
 
 ```bash
-# PRのベースブランチを取得
+# Step 1: PRのベースブランチを取得
 gh pr view 123 --json baseRefName --jq '.baseRefName'
 
-# 取得したベースブランチで差分をレビュー
-BASE_BRANCH=$(gh pr view 123 --json baseRefName --jq '.baseRefName')
-gh pr diff 123 | copilot --model gpt-5.2 -s -p "PR #123 の変更をレビューしてください。ベースブランチ: $BASE_BRANCH"
+# Step 2: 取得したベースブランチ名をプロンプトに直接記述してレビュー
+gh pr diff 123 | copilot --model gpt-5.2 -s -p "PR #123 (ベース: release-20260101) の変更をレビューしてください。"
 ```
 
 **AskUserQuestion での確認例（ベースブランチ未指定時）:**
@@ -147,9 +146,12 @@ git diff HEAD~3..HEAD | copilot --model gpt-5.2 -s -p "直近3コミットの変
 
 ```bash
 # 推奨: --add-dir で最小スコープのディレクトリアクセスを許可
-FILE="src/main.py"
-test -s "$FILE" || { echo "エラー: ファイルが存在しないか空です"; exit 1; }
-copilot --model gpt-5.2 --add-dir "$(dirname "$FILE")" -s -p "$(pwd)/$FILE をレビューしてください。
+
+# Step 1: ファイル存在確認
+test -s src/main.py
+
+# Step 2: レビュー実行（--add-dir にはファイルの親ディレクトリを指定）
+copilot --model gpt-5.2 --add-dir src -s -p "src/main.py をレビューしてください。
 
 【重要な制約】
 - レビュー対象は上記で指定されたファイルのみとすること
@@ -158,8 +160,11 @@ copilot --model gpt-5.2 --add-dir "$(dirname "$FILE")" -s -p "$(pwd)/$FILE を�
 - まず対象ファイル名を復唱してからレビューを開始すること"
 
 # 代替: プロンプト内にファイル内容を埋め込む（小ファイル向け、目安: 500行/50KB以下）
-FILE="src/main.py"
-test -s "$FILE" || { echo "エラー: ファイルが存在しないか空です"; exit 1; }
+
+# Step 1: ファイル存在確認
+test -s src/main.py
+
+# Step 2: プロンプト内に埋め込んでレビュー
 copilot --model gpt-5.2 -s -p "以下のファイル内容をレビューしてください。
 
 【重要な制約】
@@ -167,8 +172,8 @@ copilot --model gpt-5.2 -s -p "以下のファイル内容をレビューして�
 - 入力が空の場合は、推測で別のファイルをレビューせず『入力がありません』と回答すること
 - コンテキスト理解のために他のファイルを参照することは許可
 
---- ファイル: $FILE ---
-$(cat "$FILE")
+--- ファイル: src/main.py ---
+$(cat src/main.py)
 --- ファイル終了 ---"
 ```
 
@@ -199,9 +204,12 @@ git diff develop...HEAD | copilot --model gpt-5.2 -s -p "develop ブランチか
 
 ```bash
 # 推奨: --add-dir を最小スコープで使用 + CLIガード + 強化プロンプト
-FILE="implementation_plan.md"
-test -s "$FILE" || { echo "エラー: ファイルが存在しないか空です"; exit 1; }
-copilot --model gpt-5.2 --add-dir "$(dirname "$FILE")" -s -p "$(pwd)/$FILE をレビューしてください。抜け漏れや改善点があれば指摘してください。
+
+# Step 1: ファイル存在確認
+test -s implementation_plan.md
+
+# Step 2: レビュー実行
+copilot --model gpt-5.2 --add-dir . -s -p "implementation_plan.md をレビューしてください。抜け漏れや改善点があれば指摘してください。
 
 【重要な制約】
 - レビュー対象は上記で指定されたファイルのみとすること
@@ -210,8 +218,11 @@ copilot --model gpt-5.2 --add-dir "$(dirname "$FILE")" -s -p "$(pwd)/$FILE を�
 - まず対象ファイル名を復唱してからレビューを開始すること"
 
 # 代替: プロンプト内に埋め込み（小ファイル向け）
-FILE="design.md"
-test -s "$FILE" || { echo "エラー: ファイルが存在しないか空です"; exit 1; }
+
+# Step 1: ファイル存在確認
+test -s design.md
+
+# Step 2: プロンプト内に埋め込んでレビュー
 copilot --model gpt-5.2 -s -p "以下の設計書をレビューしてください。技術的な問題点や考慮漏れがあれば教えてください。
 
 【重要な制約】
@@ -219,7 +230,7 @@ copilot --model gpt-5.2 -s -p "以下の設計書をレビューしてくださ�
 - 入力が空の場合は、推測で別のファイルをレビューせず『入力がありません』と回答すること
 - コンテキスト理解のために他のファイルを参照することは許可
 
-$(cat "$FILE")"
+$(cat design.md)"
 ```
 
 ## 推奨プロンプトテンプレート
@@ -303,8 +314,8 @@ git diff -- src/service/ | copilot --model gpt-5.2 -s -p "serviceディレクト
 
 | 軸 | 推奨方法 | 使用例 | 備考 |
 |----|----------|--------|------|
-| **確実性重視** | `--add-dir` + 最小スコープ | `copilot --add-dir "$(dirname file)" -p "$(pwd)/file をレビュー"` | 最も確実 |
-| **安全性重視** | プロンプト内埋め込み | `copilot -p "$(cat file)"` | 機密リポジトリ向け、小ファイル限定 |
+| **確実性重視** | `--add-dir` + 最小スコープ | `copilot --add-dir src -p "src/file.py をレビュー"` | 最も確実 |
+| **安全性重視** | プロンプト内埋め込み | `copilot -p "レビュー内容... $(cat src/file.py)"` | 機密リポジトリ向け、小ファイル限定 |
 | **非推奨** | パイプ入力 | `cat file \| copilot -p "..."` | 動作不安定 |
 
 **埋め込み方式の制限:**
@@ -322,7 +333,7 @@ git diff -- src/service/ | copilot --model gpt-5.2 -s -p "serviceディレクト
 **CLI側でのガード（推奨）:**
 モデルに委ねる前に、シェルでファイル存在・サイズを検証：
 ```bash
-test -s "$FILE" || { echo "エラー: ファイルが存在しないか空です"; exit 1; }
+test -s path/to/file.md
 ```
 
 ## トラブルシューティング
@@ -350,10 +361,10 @@ gh auth login
 
 ```bash
 # ディレクトリアクセスを明示的に許可（最小スコープ推奨）
-copilot --model gpt-5.2 --add-dir "$(dirname /path/to/file)" -s -p "..."
+copilot --model gpt-5.2 --add-dir src -s -p "src/file.py をレビューしてください。"
 
 # 全パスへのアクセスを許可（注意して使用、非推奨）
-copilot --model gpt-5.2 --allow-all-paths -s -p "..."
+copilot --model gpt-5.2 --allow-all-paths -s -p "src/file.py をレビューしてください。"
 ```
 
 ### パイプ入力が認識されない問題
@@ -385,18 +396,22 @@ echo "TTY: $(tty)"
 
 1. **推奨: `--add-dir` を最小スコープで使用**
    ```bash
-   FILE="path/to/file.md"
-   test -s "$FILE" || { echo "エラー: ファイルが存在しないか空です"; exit 1; }
-   copilot --model gpt-5.2 --add-dir "$(dirname "$FILE")" -s -p "$(pwd)/$FILE をレビューしてください。レビュー対象は指定されたファイルのみ。入力が見えない場合は『入力が確認できません』と回答してください。まず対象ファイル名を復唱してから開始してください。"
+   # Step 1: ファイル存在確認
+   test -s path/to/file.md
+
+   # Step 2: レビュー実行
+   copilot --model gpt-5.2 --add-dir path/to -s -p "path/to/file.md をレビューしてください。レビュー対象は指定されたファイルのみ。入力が見えない場合は『入力が確認できません』と回答してください。まず対象ファイル名を復唱してから開始してください。"
    ```
 
 2. **代替: プロンプト内にファイル内容を埋め込む（小ファイル向け）**
    ```bash
-   FILE="path/to/file.md"
-   test -s "$FILE" || { echo "エラー: ファイルが存在しないか空です"; exit 1; }
+   # Step 1: ファイル存在確認
+   test -s path/to/file.md
+
+   # Step 2: プロンプト内に埋め込んでレビュー
    copilot --model gpt-5.2 -s -p "以下をレビューしてください。レビュー対象は以下の内容のみ。入力が空の場合は『入力がありません』と回答してください。
 
-   $(cat "$FILE")"
+   $(cat path/to/file.md)"
    ```
 
 3. **防御的プロンプト**: 以下をセットで含めることを推奨
