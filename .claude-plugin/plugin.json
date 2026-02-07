@@ -1,14 +1,11 @@
 {
   "name": "ai-plugins",
   "description": "チーム共有のClaude Codeスキル集",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": {
     "name": "sho.sato"
   },
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/shogidemo/ai-plugins"
-  },
+  "repository": "https://github.com/shogidemo/ai-plugins",
   "keywords": ["claude-code", "skills", "copilot", "review"]
 }

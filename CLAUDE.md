@@ -12,7 +12,7 @@
 2. **allowed-tools を明示**: 必要なツールのみを許可
 3. **前提条件を明記**: 必要な外部ツールや認証要件を記載
 4. **テンプレートを参考にする**: `skills/_template/SKILL.md` の構造に従う
-5. **バリデーションを実行**: スキル追加・変更時は `bash scripts/validate-skills.sh` で検証
+5. **バリデーションを実行**: スキル追加・変更時は `bash scripts/validate-skills.sh` で検証（plugin.json + SKILL.md を検証）
 
 ### allowed-tools パターン
 
@@ -44,7 +44,7 @@ ai-plugins/
 │   └── {skill-name}/
 │       └── SKILL.md          # スキル定義
 ├── scripts/
-│   └── validate-skills.sh    # スキルバリデーション
+│   └── validate-skills.sh    # プラグインバリデーション（plugin.json + SKILL.md）
 ├── CLAUDE.md                 # 開発ガイドライン
 └── README.md
 ```
