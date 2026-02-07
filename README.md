@@ -7,6 +7,7 @@
 | スキル名 | 説明 |
 |---------|------|
 | `copilot-review` | GitHub Copilot CLIを使ってコードレビューを依頼 |
+| `codex-assist` | Codex CLIを使ってコード作成・レビュー・デバッグを依頼 |
 
 ## インストール方法
 
@@ -52,20 +53,40 @@ GitHub Copilot CLIを使ってコードレビューを依頼するスキルで�
 /ai-plugins:copilot-review src/main.py をレビューして
 ```
 
+### codex-assist
+
+Codex CLIを使ってコード作成・レビュー・デバッグを依頼するスキルです。
+
+**呼び出し方法:**
+```
+/ai-plugins:codex-assist
+```
+
+**使用例:**
+```
+/ai-plugins:codex-assist 現在のコードをレビューして
+/ai-plugins:codex-assist src/main.py に型ヒントを追加して
+/ai-plugins:codex-assist このバグの原因を調査して
+```
+
 ## 前提条件
 
-このプラグインのスキルを使用するには、以下の環境が必要です：
+このプラグインのスキルを使用するには、以下の環境が必要です（各スキルに必要な項目は異なります。詳細は各スキルの SKILL.md を参照）：
 
 | 項目 | 要件 |
 |------|------|
 | GitHub CLI (`gh`) | インストール済み・認証済み |
 | Copilot CLI (`copilot`) | インストール済み・PATH設定済み |
+| Codex CLI (`codex`) | インストール済み・PATH設定済み |
 | GitHub認証 | `gh auth login` 完了 |
 
 **前提条件の確認方法:**
 ```bash
 # Copilot CLIの確認
 copilot --version
+
+# Codex CLIの確認
+codex --version
 
 # GitHub認証状態の確認
 gh auth status
@@ -103,10 +124,13 @@ claude --plugin-dir .
 起動後、以下のコマンドでスキルが認識されていることを確認：
 
     /ai-plugins:copilot-review
+    /ai-plugins:codex-assist
 
 **動作確認チェックリスト:**
 - スキルが `/ai-plugins:copilot-review` で呼び出せる
+- スキルが `/ai-plugins:codex-assist` で呼び出せる
 - `copilot --version` でCopilot CLIが利用可能
+- `codex --version` でCodex CLIが利用可能
 - `gh auth status` でGitHub認証済み
 - `bash scripts/validate-skills.sh` でバリデーションが通る
 
@@ -147,8 +171,10 @@ ai-plugins/
 ├── skills/
 │   ├── _template/
 │   │   └── SKILL.md          # スキルテンプレート
+│   ├── codex-assist/
+│   │   └── SKILL.md          # Codex CLIスキル定義
 │   └── copilot-review/
-│       └── SKILL.md          # スキル定義
+│       └── SKILL.md          # Copilot CLIスキル定義
 ├── scripts/
 │   └── validate-skills.sh    # スキルバリデーション
 ├── CLAUDE.md                 # 開発ガイドライン
