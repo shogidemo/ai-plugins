@@ -191,6 +191,25 @@ for skill_dir in "$SKILLS_DIR"/*/; do
     fi
 done
 
+# --- バージョン更新チェック ---
+echo ""
+echo "=== バージョン更新チェック ==="
+
+if command -v git &>/dev/null && git rev-parse --is-inside-work-tree &>/dev/null 2>&1; then
+    git_status=$(git status --porcelain)
+    skills_changed=$(echo "$git_status" | grep -E '^\s*\S+\s+skills/' || true)
+    plugin_json_changed=$(echo "$git_status" | grep -E '^\s*\S+\s+\.claude-plugin/plugin\.json' || true)
+
+    if [[ -n "$skills_changed" && -z "$plugin_json_changed" ]]; then
+        echo -e "${YELLOW}WARNING${NC}: skills/ 配下に変更がありますが、.claude-plugin/plugin.json が更新されていません"
+        echo "  バージョンの更新が必要か確認してください（CLAUDE.md「バージョン管理」セクション参照）"
+    else
+        echo -e "${GREEN}OK${NC}: バージョン更新チェック"
+    fi
+else
+    echo "SKIP: git リポジトリ外のためバージョン更新チェックをスキップ"
+fi
+
 # 結果サマリー
 echo ""
 if [[ $total_error_count -eq 0 ]]; then

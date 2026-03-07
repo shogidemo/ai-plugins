@@ -6,13 +6,14 @@
 
 ## 開発ガイドライン
 
-### スキル追加時のルール
+### スキル追加・変更時のルール
 
 1. **SKILL.md 形式に従う**: `skills/{skill-name}/SKILL.md` として作成
 2. **allowed-tools を明示**: 必要なツールのみを許可
 3. **前提条件を明記**: 必要な外部ツールや認証要件を記載
 4. **テンプレートを参考にする**: `skills/_template/SKILL.md` の構造に従う
 5. **バリデーションを実行**: スキル追加・変更時は `bash scripts/validate-skills.sh` で検証（plugin.json + SKILL.md を検証）
+6. **バージョンを更新**: スキルの追加・変更時は `plugin.json` の `version` を必ず更新する（バージョニングルールは「バージョン管理」セクションを参照）
 
 ### allowed-tools パターン
 
