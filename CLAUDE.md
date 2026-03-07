@@ -111,7 +111,7 @@ flowchart TD
 
 **コマンド例**:
 ```bash
-copilot --model gpt-5.2 --add-dir ~/.claude/plans -s -p "planファイルパス をレビューしてください。抜け漏れや改善点があれば指摘してください。"
+copilot --model gpt-5.4 --add-dir ~/.claude/plans -s -p "planファイルパス をレビューしてください。抜け漏れや改善点があれば指摘してください。"
 ```
 
 ※このレビューをスキップしてExitPlanModeを呼び出すことは禁止
