@@ -16,7 +16,9 @@
       "Bash(git show *)",
       "Bash(git restore *)",
       "Bash(gh pr *)",
-      "Bash(gh repo *)"
+      "Bash(gh repo *)",
+      "Bash(copilot *)",
+      "Bash(test *)"
     ],
     "deny": [
       "Read(**/.env)",
