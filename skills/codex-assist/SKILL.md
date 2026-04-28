@@ -35,12 +35,12 @@ codex exec -C /path/to/git-repo "hello"
 
 **重要**: コードレビュー、計画レビュー、設計レビューなどを依頼する際は、**必ず**以下の設定を使用すること。これは例外なく適用される必須ルールである。
 
-- **モデル**: `gpt-5.4`（他のモデルを使用してはならない）
+- **モデル**: `gpt-5.5`（他のモデルを使用してはならない）
 - **推論レベル**: `medium`
 - **作業ディレクトリ**: `-C` オプションでgitリポジトリを指定（**必須**）
 
 ```bash
-codex exec -m gpt-5.4 -c 'model_reasoning_effort="medium"' -C /path/to/git-repo "レビュー内容"
+codex exec -m gpt-5.5 -c 'model_reasoning_effort="medium"' -C /path/to/git-repo "レビュー内容"
 ```
 
 以下のキーワードが含まれる場合は、上記設定を使用すること：
@@ -69,7 +69,7 @@ codex exec ... &
 
 ```bash
 # OK: ファイルパスをプロンプトで指定
-codex exec -m gpt-5.4 -c 'model_reasoning_effort="medium"' \
+codex exec -m gpt-5.5 -c 'model_reasoning_effort="medium"' \
   -C /path/to/git-repo \
   "ファイル /tmp/target-file.txt を読んでレビューしてください"
 ```
@@ -79,7 +79,7 @@ codex exec -m gpt-5.4 -c 'model_reasoning_effort="medium"' \
 ### レビュー依頼（必須設定を使用）
 
 ```bash
-codex exec -m gpt-5.4 -c 'model_reasoning_effort="medium"' -C /path/to/git-repo "レビュー内容"
+codex exec -m gpt-5.5 -c 'model_reasoning_effort="medium"' -C /path/to/git-repo "レビュー内容"
 ```
 
 ### PRの差分をレビュー
@@ -91,7 +91,7 @@ PR差分は事前に一時ファイルへ保存してから、ファイルパス
 gh pr diff 123 --repo owner/repo > /tmp/pr-123-diff.txt
 
 # Step 2: ファイルパスをプロンプトで指定してレビュー依頼
-codex exec -m gpt-5.4 -c 'model_reasoning_effort="medium"' \
+codex exec -m gpt-5.5 -c 'model_reasoning_effort="medium"' \
   -C /path/to/project \
   "ファイル /tmp/pr-123-diff.txt を読んで、セキュリティ観点を含めてレビューしてください"
 ```
@@ -103,7 +103,7 @@ codex exec -m gpt-5.4 -c 'model_reasoning_effort="medium"' \
 test -s src/main.py
 
 # Step 2: ファイルパスをプロンプトで指定
-codex exec -m gpt-5.4 -c 'model_reasoning_effort="medium"' \
+codex exec -m gpt-5.5 -c 'model_reasoning_effort="medium"' \
   -C /path/to/project \
   "src/main.py をレビューしてください"
 ```
@@ -126,7 +126,7 @@ codex exec --full-auto -C /path/to/project "Add error handling to all API endpoi
 
 | オプション | 説明 |
 |-----------|------|
-| `-m MODEL` | 使用するモデルを指定（レビュー時は `gpt-5.4` 必須） |
+| `-m MODEL` | 使用するモデルを指定（レビュー時は `gpt-5.5` 必須） |
 | `-c KEY=VALUE` | 設定オプション。値はTOMLとして解釈される |
 | `-C DIR` | 作業ディレクトリを指定（**必須**: gitリポジトリ） |
 | `--full-auto` | サンドボックス内で自動実行を有効化 |
@@ -182,7 +182,7 @@ codex exec -C /path/to/git-repo "your question"
 test -s /path/to/file.txt
 
 # Step 2: ファイルパスをプロンプトで指定
-codex exec -m gpt-5.4 -c 'model_reasoning_effort="medium"' \
+codex exec -m gpt-5.5 -c 'model_reasoning_effort="medium"' \
   -C /path/to/git-repo \
   "ファイル /path/to/file.txt を読んでレビューしてください"
 ```
@@ -194,5 +194,5 @@ codex exec -m gpt-5.4 -c 'model_reasoning_effort="medium"' \
 - `--full-auto` で自動実行を有効化できるが、変更内容の確認を推奨
 - **`-C` オプションでgitリポジトリを指定することが必須**
 - Model defaults は `~/.codex/config.toml` で設定可能
-- **レビュー依頼時は必ず `-m gpt-5.4 -c 'model_reasoning_effort="medium"'` を指定すること**
+- **レビュー依頼時は必ず `-m gpt-5.5 -c 'model_reasoning_effort="medium"'` を指定すること**
 - **Claude Code環境ではパイプ/リダイレクト入力は使用不可** - 代わりにプロンプト内でファイルパスを指定

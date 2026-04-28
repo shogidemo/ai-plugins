@@ -1,7 +1,7 @@
 {
   "name": "ai-plugins",
   "description": "チーム共有のClaude Codeスキル集",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "author": {
     "name": "sho.sato"
   },
